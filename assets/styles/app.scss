@@ -1,5 +1,3 @@
-@import '../../vendor/twbs/bootstrap/scss/bootstrap';
-
 /* assets/styles/app.scss */
 
 $primary : #828b6a;
@@ -14,9 +12,13 @@ $text-primary : 'Playfair Display';
 
 .baseHeader {
   height: max-content;
+  width: 100%;
   margin: 0;
   padding: 0;
   background: $primary;
   font-family: $text-primary;
   color: $light;
+  text-align: center;
 }
+
+@import '../../vendor/twbs/bootstrap/scss/bootstrap';
