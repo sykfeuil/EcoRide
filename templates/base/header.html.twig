@@ -1,0 +1,38 @@
+<header>
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('styles/app.css') }}">
+    {% endblock %}
+    {% block javascripts %}
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+    {% endblock %}
+</header>
+<nav class="navbar navbar-expand-lg">
+    <div class="baseHeader container-fluid text-center">
+        <div class="row row-cols-1 col-md-3">
+            <div class="col p-3">
+                <h1 class="fw-bold">ECORIDE</h1>
+            </div>
+
+            <div class="col p-3">
+                <p>Pour avancer ensemble de manière durable</p>
+            </div>
+
+            <div class="col p-3">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/">Accueil</a>
+                    </li>
+                </ul>
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Je veux aller à ..." aria-label="Search">
+                    <button class="btn btn-success" type="submit">GO</button>
+                </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
