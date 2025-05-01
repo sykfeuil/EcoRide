@@ -10,7 +10,7 @@ $dark : #674736;
 
 $text-primary : 'Playfair Display';
 
-.baseHeader {
+.baseHeader, .baseFooter {
   height: max-content;
   width: 100%;
   margin: 0;
@@ -19,6 +19,44 @@ $text-primary : 'Playfair Display';
   font-family: $text-primary;
   color: $light;
   text-align: center;
+}
+
+.baseFooter {
+  bottom: 0;
+  left: 0;
+}
+
+#carouselHomeDesign {
+  height: 500px;
+  background: black;
+}
+
+.search-container {
+  position: relative;
+}
+
+.search-icon {
+  position: absolute;
+  top: 50%;
+  left: 15px;
+  transform: translateY(-50%);
+  color: $primary;
+}
+
+.icon {
+  font-size: xx-large;
+  color: $primary;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  font-family: $text-primary;
+}
+
+.frenchFlag {
+  height: 25px;
+  margin-bottom: 5px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 @import '../../vendor/twbs/bootstrap/scss/bootstrap';

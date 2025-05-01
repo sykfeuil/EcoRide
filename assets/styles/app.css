@@ -1,6 +1,6 @@
 @charset "UTF-8";
 /* assets/styles/app.scss */
-.baseHeader {
+.baseHeader, .baseFooter {
   height: -moz-max-content;
   height: max-content;
   width: 100%;
@@ -10,6 +10,44 @@
   font-family: "Playfair Display";
   color: #e4eacf;
   text-align: center;
+}
+
+.baseFooter {
+  bottom: 0;
+  left: 0;
+}
+
+#carouselHomeDesign {
+  height: 500px;
+  background: black;
+}
+
+.search-container {
+  position: relative;
+}
+
+.search-icon {
+  position: absolute;
+  top: 50%;
+  left: 15px;
+  transform: translateY(-50%);
+  color: #828b6a;
+}
+
+.icon {
+  font-size: xx-large;
+  color: #828b6a;
+}
+
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p {
+  font-family: "Playfair Display";
+}
+
+.frenchFlag {
+  height: 25px;
+  margin-bottom: 5px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 /*!
