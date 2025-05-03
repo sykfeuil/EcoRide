@@ -48,7 +48,7 @@ $text-primary : 'Playfair Display';
   color: $primary;
 }
 
-h1, h2, h3, h4, h5, h6, p {
+h1, h2, h3, h4, h5, h6, p, div, input, label {
   font-family: $text-primary;
 }
 
@@ -57,6 +57,11 @@ h1, h2, h3, h4, h5, h6, p {
   margin-bottom: 5px;
   margin-left: 10px;
   margin-right: 10px;
+}
+
+.starIco {
+  height: 25px;
+  margin-top: 7px;
 }
 
 @import '../../vendor/twbs/bootstrap/scss/bootstrap';

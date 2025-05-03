@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon compte - EcoRide{% endblock %}
+
+{% block body %}
+    <div class="container p-3">
+        <div class="row">
+
+            <div class="col-12 col-lg-8 d-inline-flex m-0 p-3 justify-content-center text-align-center">
+                <h2 class="mx-3 my-auto text-primary fw-bold">Espace utilisateur - {{ currentUser.username }}</h2>
+                <img class="starIco my-auto ms-5" src="images/star.jpg" alt="Etoile jaune">
+                <h5 class="ms-1 my-auto text-warning fw-bold">{{ currentUser.mark }}</h5>
+            </div>
+
+            <div class="col-12 col-lg-4 text-center">
+                <img class="rounded end-0 mx-5" src="images/USER_PIC.jpg" alt="Profil" height="250" width="250">
+            </div>
+            
+            <div class="col-12 py-3">
+                <p>Adresse mail : {{ currentUser.email }}</p>
+            </div>
+
+            <div class="col-12 py-3">
+                {{ form_errors(accountDataForm) }}
+
+                {{ form_start(accountDataForm) }}
+                    {{ form_row(accountDataForm.driver, {
+                        label: 'Je veux être conducteur',
+                        value: currentUser.driver
+                    }) }}
+                    {{ form_row(accountDataForm.passenger, {
+                        label: 'Je veux être passager',
+                        value: currentUser.passenger
+                    }) }}
+                    {{ form_row(accountDataForm.smoke, {
+                        label: 'Accepter les fumeurs ?',
+                        value: currentUser.smoke
+                    }) }}
+                    {{ form_row(accountDataForm.animal, {
+                        label: 'Accepter les animaux ?',
+                        value: currentUser.animal
+                    }) }}
+                    {{ form_row(accountDataForm.preferences, {
+                        label: 'Ajouter d\'autres préférences pour le covoiturage :',
+                        value: currentUser.preferences
+                    }) }}
+                    {{ form_row(accountDataForm.credit, {
+                        label: 'Mes crédits :',
+                        value: currentUser.credit
+                    }) }}
+                    {{ form_row(accountDataForm.picture, {
+                        label: 'Modifier la photo de profil :',
+                        value: currentUser.picture
+                    }) }}
+
+                    <button type="submit" class="btn btn-success text-light my-5">Enregistrer les modifications</button>
+                {{ form_end(accountDataForm) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

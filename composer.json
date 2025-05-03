@@ -18,6 +18,7 @@
         "symfony/console": "7.2.*",
         "symfony/doctrine-messenger": "7.2.*",
         "symfony/dotenv": "7.2.*",
+        "symfony/event-dispatcher": "7.2.*",
         "symfony/expression-language": "7.2.*",
         "symfony/flex": "^2.5",
         "symfony/form": "7.2.*",
@@ -43,6 +44,7 @@
         "symfony/web-link": "7.2.*",
         "symfony/yaml": "7.2.*",
         "symfonycasts/sass-bundle": "^0.8.2",
+        "symfonycasts/verify-email-bundle": "^1.17",
         "twbs/bootstrap": "^5.3",
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/twig": "^2.12|^3.0"

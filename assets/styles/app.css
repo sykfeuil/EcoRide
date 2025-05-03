@@ -39,7 +39,7 @@
   color: #828b6a;
 }
 
-h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p {
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, div, input, label {
   font-family: "Playfair Display";
 }
 
@@ -48,6 +48,11 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p {
   margin-bottom: 5px;
   margin-left: 10px;
   margin-right: 10px;
+}
+
+.starIco {
+  height: 25px;
+  margin-top: 7px;
 }
 
 /*!

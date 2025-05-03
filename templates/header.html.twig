@@ -17,17 +17,29 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link active text-light" aria-current="page" href="/">Accueil</a>
+                                <a class="nav-link active text-light link-opacity-50-hover" aria-current="page" href="/">Accueil</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active text-light" aria-current="page" href="/">Covoiturage</a>
+                                <a class="nav-link active text-light link-opacity-50-hover" aria-current="page" href="/">Covoiturage</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active text-light" aria-current="page" href="/">Connexion</a>
+                                <a class="nav-link active text-light link-opacity-50-hover" aria-current="page" href="/">Contact</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link active text-light" aria-current="page" href="/">Contact</a>
-                            </li>
+                            {% if app.user %}
+                                <li class="nav-item">
+                                    <a class="nav-link active text-light link-opacity-50-hover" aria-current="page" href="/account">Mon Compte</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active text-light link-opacity-50-hover" aria-current="page" href="/logout">Déconnexion</a>
+                                </li>
+                            {% else %}
+                                <li class="nav-item">
+                                    <a class="nav-link active text-light link-opacity-50-hover" aria-current="page" href="/login">Connexion</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active text-light link-opacity-50-hover" aria-current="page" href="/register">Inscription</a>
+                                </li>
+                            {% endif %}
                         </ul>
                     </div>
                 </div>
