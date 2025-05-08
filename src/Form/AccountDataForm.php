@@ -15,7 +15,8 @@ class AccountDataForm extends AbstractType
     {
         $builder
             ->add('picture', FileType::class, [
-                'mapped' => true,
+                'mapped' => false,
+                'required' => false,
                 'constraints' => [
                     new Image([
                         'mimeTypesMessage' => 'Merci de choisir une image valide'

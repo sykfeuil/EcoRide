@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -37,7 +39,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $username = null;
 
-    #[ORM\Column(type: Types::BLOB, nullable: true)]
+    #[ORM\Column(length: 255, nullable: true)]
     private $picture = null;
 
     #[ORM\Column]
@@ -63,6 +65,31 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column]
     private bool $isVerified = false;
+
+    /**
+     * @var Collection<int, Car>
+     */
+    #[ORM\OneToMany(targetEntity: Car::class, mappedBy: 'User', orphanRemoval: true)]
+    private Collection $cars;
+
+    /**
+     * @var Collection<int, Travel>
+     */
+    #[ORM\OneToMany(targetEntity: Travel::class, mappedBy: 'Driver', orphanRemoval: true)]
+    private Collection $travel;
+
+    /**
+     * @var Collection<int, Travel>
+     */
+    #[ORM\OneToMany(targetEntity: Travel::class, mappedBy: 'driver', orphanRemoval: true)]
+    private Collection $travelAsDriver;
+
+    public function __construct()
+    {
+        $this->cars = new ArrayCollection();
+        $this->travel = new ArrayCollection();
+        $this->travelAsDriver = new ArrayCollection();
+    }
 
     
     public function getId(): ?int
@@ -254,6 +281,96 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsVerified(bool $isVerified): static
     {
         $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Car>
+     */
+    public function getCars(): Collection
+    {
+        return $this->cars;
+    }
+
+    public function addCar(Car $car): static
+    {
+        if (!$this->cars->contains($car)) {
+            $this->cars->add($car);
+            $car->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCar(Car $car): static
+    {
+        if ($this->cars->removeElement($car)) {
+            // set the owning side to null (unless already changed)
+            if ($car->getUser() === $this) {
+                $car->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Travel>
+     */
+    public function getTravel(): Collection
+    {
+        return $this->travel;
+    }
+
+    public function addTravel(Travel $travel): static
+    {
+        if (!$this->travel->contains($travel)) {
+            $this->travel->add($travel);
+            $travel->setDriver($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTravel(Travel $travel): static
+    {
+        if ($this->travel->removeElement($travel)) {
+            // set the owning side to null (unless already changed)
+            if ($travel->getDriver() === $this) {
+                $travel->setDriver(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Travel>
+     */
+    public function getTravelAsDriver(): Collection
+    {
+        return $this->travelAsDriver;
+    }
+
+    public function addTravelAsDriver(Travel $travelAsDriver): static
+    {
+        if (!$this->travelAsDriver->contains($travelAsDriver)) {
+            $this->travelAsDriver->add($travelAsDriver);
+            $travelAsDriver->setDriver($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTravelAsDriver(Travel $travelAsDriver): static
+    {
+        if ($this->travelAsDriver->removeElement($travelAsDriver)) {
+            // set the owning side to null (unless already changed)
+            if ($travelAsDriver->getDriver() === $this) {
+                $travelAsDriver->setDriver(null);
+            }
+        }
 
         return $this;
     }

@@ -3,6 +3,7 @@
 {% block title %}Mon compte - EcoRide{% endblock %}
 
 {% block body %}
+    {% include 'userInterface/userBase.html.twig' %}
     <div class="container p-3">
         <div class="row">
 
@@ -13,7 +14,8 @@
             </div>
 
             <div class="col-12 col-lg-4 text-center">
-                <img class="rounded end-0 mx-5" src="images/USER_PIC.jpg" alt="Profil" height="250" width="250">
+                <img class="rounded end-0 mx-5" src="{% if currentUser.picture is empty %}images/USER_PIC.jpg{% else %}uploads/profilePics/{{ currentUser.picture }}{% endif %}" alt="Profil" height="250" width="250">
+                <a href="/account/del" class="btn btn-danger text-light mt-3">Supprimer l'image</a>
             </div>
             
             <div class="col-12 py-3">
@@ -25,25 +27,28 @@
 
                 {{ form_start(accountDataForm) }}
                     {{ form_row(accountDataForm.driver, {
+                        id: 'formDriver',
                         label: 'Je veux être conducteur',
-                        value: currentUser.driver
+                        checked: currentUser.driver
                     }) }}
                     {{ form_row(accountDataForm.passenger, {
                         label: 'Je veux être passager',
-                        value: currentUser.passenger
+                        checked: currentUser.passenger
                     }) }}
-                    {{ form_row(accountDataForm.smoke, {
-                        label: 'Accepter les fumeurs ?',
-                        value: currentUser.smoke
-                    }) }}
-                    {{ form_row(accountDataForm.animal, {
-                        label: 'Accepter les animaux ?',
-                        value: currentUser.animal
-                    }) }}
-                    {{ form_row(accountDataForm.preferences, {
-                        label: 'Ajouter d\'autres préférences pour le covoiturage :',
-                        value: currentUser.preferences
-                    }) }}
+                    <div id="driverFormData">
+                        {{ form_row(accountDataForm.smoke, {
+                            label: 'Accepter les fumeurs ?',
+                            checked: currentUser.smoke
+                        }) }}
+                        {{ form_row(accountDataForm.animal, {
+                            label: 'Accepter les animaux ?',
+                            checked: currentUser.animal
+                        }) }}
+                        {{ form_row(accountDataForm.preferences, {
+                            label: 'Ajouter d\'autres préférences pour le covoiturage :',
+                            value: currentUser.preferences
+                        }) }}
+                    </div>
                     {{ form_row(accountDataForm.credit, {
                         label: 'Mes crédits :',
                         value: currentUser.credit
@@ -58,4 +63,8 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/userAccount.js') }}"></script>
 {% endblock %}
