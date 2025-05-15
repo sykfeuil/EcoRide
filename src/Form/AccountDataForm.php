@@ -5,9 +5,11 @@ namespace App\Form;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Image;
+use Symfony\Component\Validator\Constraints\PositiveOrZero;
 
 class AccountDataForm extends AbstractType
 {
@@ -28,7 +30,14 @@ class AccountDataForm extends AbstractType
             ->add('smoke')
             ->add('animal')
             ->add('preferences')
-            ->add('credit')
+            ->add('credit', IntegerType::class, [
+                'required' => false,
+                'constraints' => [
+                    new PositiveOrZero([
+                        'message' => 'Merci de saisir une quanité de crédits positive ou nulle'
+                    ]),
+                ]
+            ])
         ;
     }
 

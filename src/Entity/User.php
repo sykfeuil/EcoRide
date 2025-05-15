@@ -75,20 +75,27 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var Collection<int, Travel>
      */
-    #[ORM\OneToMany(targetEntity: Travel::class, mappedBy: 'Driver', orphanRemoval: true)]
-    private Collection $travel;
+    #[ORM\OneToMany(targetEntity: Travel::class, mappedBy: 'driver', orphanRemoval: true)]
+    private Collection $travelAsDriver;
 
     /**
      * @var Collection<int, Travel>
      */
-    #[ORM\OneToMany(targetEntity: Travel::class, mappedBy: 'driver', orphanRemoval: true)]
-    private Collection $travelAsDriver;
+    #[ORM\ManyToMany(targetEntity: Travel::class, mappedBy: 'passengers')]
+    private Collection $travelAsPassenger;
+
+    /**
+     * @var Collection<int, Opinion>
+     */
+    #[ORM\OneToMany(targetEntity: Opinion::class, mappedBy: 'driver', orphanRemoval: true)]
+    private Collection $opinions;
 
     public function __construct()
     {
         $this->cars = new ArrayCollection();
-        $this->travel = new ArrayCollection();
         $this->travelAsDriver = new ArrayCollection();
+        $this->travelAsPassenger = new ArrayCollection();
+        $this->opinions = new ArrayCollection();
     }
 
     
@@ -318,36 +325,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @return Collection<int, Travel>
      */
-    public function getTravel(): Collection
-    {
-        return $this->travel;
-    }
-
-    public function addTravel(Travel $travel): static
-    {
-        if (!$this->travel->contains($travel)) {
-            $this->travel->add($travel);
-            $travel->setDriver($this);
-        }
-
-        return $this;
-    }
-
-    public function removeTravel(Travel $travel): static
-    {
-        if ($this->travel->removeElement($travel)) {
-            // set the owning side to null (unless already changed)
-            if ($travel->getDriver() === $this) {
-                $travel->setDriver(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Travel>
-     */
     public function getTravelAsDriver(): Collection
     {
         return $this->travelAsDriver;
@@ -369,6 +346,63 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($travelAsDriver->getDriver() === $this) {
                 $travelAsDriver->setDriver(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Travel>
+     */
+    public function getTravelAsPassenger(): Collection
+    {
+        return $this->travelAsPassenger;
+    }
+
+    public function addTravelAsPassenger(Travel $travelAsPassenger): static
+    {
+        if (!$this->travelAsPassenger->contains($travelAsPassenger)) {
+            $this->travelAsPassenger->add($travelAsPassenger);
+            $travelAsPassenger->addPassenger($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTravelAsPassenger(Travel $travelAsPassenger): static
+    {
+        if ($this->travelAsPassenger->removeElement($travelAsPassenger)) {
+            $travelAsPassenger->removePassenger($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Opinion>
+     */
+    public function getOpinions(): Collection
+    {
+        return $this->opinions;
+    }
+
+    public function addOpinion(Opinion $opinion): static
+    {
+        if (!$this->opinions->contains($opinion)) {
+            $this->opinions->add($opinion);
+            $opinion->setDriver($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOpinion(Opinion $opinion): static
+    {
+        if ($this->opinions->removeElement($opinion)) {
+            // set the owning side to null (unless already changed)
+            if ($opinion->getDriver() === $this) {
+                $opinion->setDriver(null);
             }
         }
 

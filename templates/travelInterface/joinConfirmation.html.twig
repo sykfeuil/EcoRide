@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Confirmation du trajet - EcoRide{% endblock %}
+
+{% block body %}
+    {{ form_errors(confirmForm) }}
+
+    {{ form_start(confirmForm) }}
+        <div class="container p-5">
+            <div class="row p-5">
+                <div class="col">
+                    {{ form_row(confirmForm.credit, {
+                        label: 'Attention vous allez dépenser ces crédits pour le covoiturage',
+                        value: travel.price
+                    }) }}
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-center">
+            <button type="submit" class="btn btn-success text-light my-5">Je confirme</button>
+        </div>
+    {{ form_end(confirmForm) }}
+{% endblock %}

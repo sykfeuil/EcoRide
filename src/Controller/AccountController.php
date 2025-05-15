@@ -21,7 +21,7 @@ class AccountController extends AbstractController
         Request $request,
         EntityManagerInterface $entityManager,
         SluggerInterface $slugger,
-        #[Autowire('%kernel.project_dir%/public/uploads/profilePics')] string $uploadDirectory
+        #[Autowire('%kernel.project_dir%/assets/images/uploads')] string $uploadDirectory
     ): Response
     {
         // Uniquement pour les utilisateurs

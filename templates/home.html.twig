@@ -4,9 +4,9 @@
 
 {% block body %}
   <div class="d-inline-flex m-0 p-3 w-100 bg-primary justify-content-center align-items-center text-center text-light">
-    <img class="frenchFlag rounded text-center" src="images/French_Flag.jpg" alt="Drapeau français">
+    <img class="frenchFlag rounded text-center" src="{{ asset('images/French_Flag.jpg') }}" alt="Drapeau français">
     <h2>Covoiturez écologiquement avec la startup EcoRide</h2>
-    <img class="frenchFlag rounded text-center" src="images/French_Flag.jpg" alt="Drapeau français">
+    <img class="frenchFlag rounded text-center" src="{{ asset('images/French_Flag.jpg') }}" alt="Drapeau français">
   </div>
 
   <div class="container p-3">
@@ -28,21 +28,21 @@
     </div>
     <div class="carousel-inner h-100">
       <div class="carousel-item active h-100">
-        <img src="/images/Home_Car_1.jpg" class="d-block w-100 opacity-50" alt="Covoiturage dans une voiture sur une route au soleil">
+        <img src="{{ asset('images/Home_Car_1.jpg') }}" class="d-block w-100 opacity-50" alt="Covoiturage dans une voiture sur une route au soleil">
         <div class="carousel-caption d-none d-md-block">
           <h5>Rejoignez EcoRide</h5>
           <p>Pour des rencontres formidables et des moments de partages</p>
         </div>
       </div>
       <div class="carousel-item h-100">
-        <img src="/images/Home_Car_3.jpg" class="d-block w-100 opacity-50" alt="Route au milieu de la forêt vue depuis le pare-brise d'une voiture">
+        <img src="{{ asset('images/Home_Car_3.jpg') }}" class="d-block w-100 opacity-50" alt="Route au milieu de la forêt vue depuis le pare-brise d'une voiture">
         <div class="carousel-caption d-none d-md-block">
           <h5>Rejoignez EcoRide</h5>
           <p>Pour ceux qui veulent rouler au milieu des arbres</p>
         </div>
       </div>
       <div class="carousel-item h-100">
-        <img src="/images/Home_Car_4.jpg" class="d-block w-100 opacity-50" alt="Forêt de sapin en montagne avec la brume qui se lève en contrebas">
+        <img src="{{ asset('images/Home_Car_4.jpg') }}" class="d-block w-100 opacity-50" alt="Forêt de sapin en montagne avec la brume qui se lève en contrebas">
         <div class="carousel-caption d-none d-md-block">
           <h5>Rejoignez EcoRide</h5>
           <p>Car ici nous préférons ce genre de paysage</p>
@@ -82,7 +82,7 @@
 
   <div class="row p-0 m-0">
     <div class="col-12 col-md-5 p-3 d-flex align-items-center">
-      <img class="w-100 rounded" src="images/Home_Inspiring.jpg" alt="Homme de dos face à un lac">
+      <img class="w-100 rounded" src="{{ asset('images/Home_Inspiring.jpg') }}" alt="Homme de dos face à un lac">
     </div>
     <div class="col-12 col-md-7 d-flex text-center p-3 align-items-center">
       <blockquote class="blockquote">

@@ -6,6 +6,7 @@ use App\Entity\Car;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ColorType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -48,7 +49,7 @@ class CarForm extends AbstractType
             ->add('Brand', TextType::class, [
                 'required' => true,
             ])
-            ->add('Seats', NumberType::class, [
+            ->add('Seats', IntegerType::class, [
                 'required' => true,
                 'constraints' => [
                     new Positive([

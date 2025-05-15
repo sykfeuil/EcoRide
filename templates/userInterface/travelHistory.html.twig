@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Historique des trajets - EcoRide{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="d-inline-flex m-0 p-3 justify-content-center text-align-center">
+            <h2 class="mx-5 my-auto text-primary fw-bold">Historique</h2>
+            {% if app.user.driver == true %}
+            <a href="/travels/create" class="btn btn-success text-light mx-5">Créer un voyage</a>
+            {% endif %}
+        </div>
+        <table class="table">
+            <tbody>
+                {% for travel in travelList %}
+                        <tr class="text-center align-middle">
+
+                            <td class="text-primary fw-bold">
+                            {% if currentUser.id == travel.driver.id %}
+                                Chauffeur
+                            {% else %}
+                                {% for passenger in travel.passengers %}
+                                    {% if currentUser.id == passenger.id %}
+                                        Passager
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                            </td>
+
+                            <td>
+                            {{ travel.driver.username }}
+                            <br><img class="rounded end-0 mx-5" {% if travel.driver.picture is empty %}src="{{ asset('images/USER_PIC.jpg') }}"{% else %}src="{{ asset('images/uploads/' ~ travel.driver.picture) }}"{% endif %} alt="Profil" height="50" width="50">
+                            <br><div class="d-inline-flex">
+                                    <img src="{{ asset('images/Star_TR.png') }}" alt="Etoile jaune" height="20" width="20">
+                                    <h5 class="text-warning fw-bold">{{ travel.driver.mark }}</h5>
+                                </div>
+                            </td>
+                            <td>{{ travel.availableSeats }} places</td>
+                            <td>{{ travel.price }} crédits</td>
+                            <td>Départ de {{ travel.startingPlace }}<br>Le {{ travel.startingDate|date("d/m/Y", "Europe/Paris") }}<br>À {{ travel.startingHour|date("H:i", "Europe/Paris") }}</td>
+                            <td>Arrivée à {{ travel.endingPlace }} <br>Le {{ travel.endingDate|date("d/m/Y", "Europe/Paris") }}<br>À {{ travel.endingHour|date("H:i", "Europe/Paris") }}</td>
+                            {% if travel.car.electrical == 1 %}<td>Voyage<br>écologique</td>{% else %}<td></td>{% endif %}
+                            <td>
+                                {% if currentUser.id == travel.driver.id %}
+                                    {% if travel.currentState == 1 %}
+                                        <a class="btn btn-success text-light" href="{{ path('TravelStart', {'travelID':travel.id}  )  }}">Démarrer</a>
+                                        <a class="btn btn-warning text-white" href="{{ path('TravelDetail', {'travelID':travel.id}  )  }}">Détails</a>
+                                        <a class="btn btn-danger text-light" href="{{ path('CancelTravel', {'travelID':travel.id}  )  }}">Annuler</a>
+                                    {% endif %}
+                                    {% if travel.currentState == 2 %}
+                                        <a class="btn btn-success text-light" href="{{ path('TravelEnd', {'travelID':travel.id}  )  }}">Arrivé à destination</a>
+                                    {% endif %}
+                                    {% if travel.currentState == 3 %}
+                                        <p>Covoiturage terminé</p>
+                                    {% endif %}
+                                {% else %}
+                                    {% for passenger in travel.passengers %}
+                                        {% if currentUser.id == passenger.id %}
+                                            {% if travel.currentState == 1 %}
+                                                <a class="btn btn-warning text-white" href="{{ path('TravelDetail', {'travelID':travel.id}  )  }}">Détails</a>
+                                                <a class="btn btn-danger text-light" href="{{ path('CancelTravel', {'travelID':travel.id}  )  }}">Annuler</a>
+                                            {% endif %}
+                                            {% if travel.currentState == 2 %}
+                                                <p>Covoiturage en cours</p>
+                                            {% endif %}
+                                            {% if travel.currentState == 3 %}
+                                                <a class="btn btn-success text-light" href="{{ path('ReviewTravel', {'travelID':travel.id}  )  }}">Noter le voyage</a>
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                                
+                            </td>
+                        </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

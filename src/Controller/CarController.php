@@ -8,19 +8,14 @@ use App\Entity\User;
 use App\Form\CarForm;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\String\Slugger\SluggerInterface;
-
-use function PHPUnit\Framework\isEmpty;
 
 class CarController extends AbstractController
 {
     #[Route('/cars', name : 'CarList')]
     public function displayPage(
-        Request $request,
         EntityManagerInterface $entityManager
     ): Response
     {

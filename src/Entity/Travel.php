@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\TravelRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: TravelRepository::class)]
@@ -21,14 +22,8 @@ class Travel
     #[ORM\Column]
     private ?float $price = null;
 
-    #[ORM\Column]
-    private ?\DateTime $startingDate = null;
-
     #[ORM\Column(length: 255)]
     private ?string $startingPlace = null;
-
-    #[ORM\Column]
-    private ?\DateTime $endingDate = null;
 
     #[ORM\Column(length: 255)]
     private ?string $endingPlace = null;
@@ -37,15 +32,30 @@ class Travel
     #[ORM\JoinColumn(nullable: false)]
     private ?Car $car = null;
 
-    /**
-     * @var Collection<int, User>
-     */
-    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'travel')]
-    private Collection $passengers;
-
     #[ORM\ManyToOne(inversedBy: 'travelAsDriver')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $driver = null;
+
+    /**
+     * @var Collection<int, User>
+     */
+    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'travelAsPassenger')]
+    private Collection $passengers;
+
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    private ?\DateTime $startingDate = null;
+
+    #[ORM\Column(type: Types::TIME_MUTABLE)]
+    private ?\DateTime $startingHour = null;
+
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    private ?\DateTime $endingDate = null;
+
+    #[ORM\Column(type: Types::TIME_MUTABLE)]
+    private ?\DateTime $endingHour = null;
+
+    #[ORM\Column]
+    private ?int $currentState = null;
 
     public function __construct()
     {
@@ -81,18 +91,6 @@ class Travel
         return $this;
     }
 
-    public function getStartingDate(): ?\DateTime
-    {
-        return $this->startingDate;
-    }
-
-    public function setStartingDate(\DateTime $startingDate): static
-    {
-        $this->startingDate = $startingDate;
-
-        return $this;
-    }
-
     public function getStartingPlace(): ?string
     {
         return $this->startingPlace;
@@ -101,18 +99,6 @@ class Travel
     public function setStartingPlace(string $startingPlace): static
     {
         $this->startingPlace = $startingPlace;
-
-        return $this;
-    }
-
-    public function getEndingDate(): ?\DateTime
-    {
-        return $this->endingDate;
-    }
-
-    public function setEndingDate(\DateTime $endingDate): static
-    {
-        $this->endingDate = $endingDate;
 
         return $this;
     }
@@ -141,6 +127,18 @@ class Travel
         return $this;
     }
 
+    public function getDriver(): ?User
+    {
+        return $this->driver;
+    }
+
+    public function setDriver(?User $driver): static
+    {
+        $this->driver = $driver;
+
+        return $this;
+    }
+
     /**
      * @return Collection<int, User>
      */
@@ -161,6 +159,66 @@ class Travel
     public function removePassenger(User $passenger): static
     {
         $this->passengers->removeElement($passenger);
+
+        return $this;
+    }
+
+    public function getStartingDate(): ?\DateTime
+    {
+        return $this->startingDate;
+    }
+
+    public function setStartingDate(\DateTime $startingDate): static
+    {
+        $this->startingDate = $startingDate;
+
+        return $this;
+    }
+
+    public function getStartingHour(): ?\DateTime
+    {
+        return $this->startingHour;
+    }
+
+    public function setStartingHour(\DateTime $startingHour): static
+    {
+        $this->startingHour = $startingHour;
+
+        return $this;
+    }
+
+    public function getEndingDate(): ?\DateTime
+    {
+        return $this->endingDate;
+    }
+
+    public function setEndingDate(\DateTime $endingDate): static
+    {
+        $this->endingDate = $endingDate;
+
+        return $this;
+    }
+
+    public function getEndingHour(): ?\DateTime
+    {
+        return $this->endingHour;
+    }
+
+    public function setEndingHour(\DateTime $endingHour): static
+    {
+        $this->endingHour = $endingHour;
+
+        return $this;
+    }
+
+    public function getCurrentState(): ?int
+    {
+        return $this->currentState;
+    }
+
+    public function setCurrentState(int $currentState): static
+    {
+        $this->currentState = $currentState;
 
         return $this;
     }

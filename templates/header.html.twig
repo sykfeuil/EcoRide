@@ -20,14 +20,21 @@
                                 <a class="nav-link active text-light link-opacity-50-hover" aria-current="page" href="/">Accueil</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active text-light link-opacity-50-hover" aria-current="page" href="/">Covoiturage</a>
+                                <a class="nav-link active text-light link-opacity-50-hover" aria-current="page" href="/travels">Covoiturage</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link active text-light link-opacity-50-hover" aria-current="page" href="/">Contact</a>
                             </li>
                             {% if app.user %}
-                                <li class="nav-item">
-                                    <a class="nav-link active text-light link-opacity-50-hover" aria-current="page" href="/account">Mon Compte</a>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle active text-light link-opacity-50-hover" data-bs-toggle="dropdown" role="button" aria-expanded="false">Mon Compte</a>
+                                    <ul class="dropdown-menu bg-primary">
+                                        <li><a class="dropdown-item active text-white link-opacity-50-hover" href="/account">Profil</a></li>
+                                        <li><a class="dropdown-item active text-white link-opacity-50-hover" href="/history">Historique</a></li>
+                                        {% if app.user.driver == true %}
+                                            <li><a class="dropdown-item active text-white link-opacity-50-hover" href="/cars">Voitures</a></li>
+                                        {% endif %}
+                                    </ul>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link active text-light link-opacity-50-hover" aria-current="page" href="/logout">Déconnexion</a>
