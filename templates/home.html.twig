@@ -13,8 +13,24 @@
     <div class="row justify-content-center">
       <div class="col-12">
         <div class="search-container">
-          <input type="text" class="form-control search-input px-5" placeholder="Rechercher un trajet...">
-          <i class="fas fa-search search-icon"></i>
+          <!--<input type="submit" class="form-control search-input px-5" placeholder="Rechercher un trajet...">
+          <i class="fas fa-search search-icon"></i>-->
+            {{ form_errors(form) }}
+
+                {{ form_start(form) }}
+                <div class="container m-1">
+                  <div class="row">
+                    <div class="col">
+                      {{ form_row(form.wantedEndingPlace, {
+                          label: false
+                      }) }}
+                    </div>
+                    <div class="col-1">
+                      <button type="submit" class="btn btn-light text-primary w-75"><i class="fas fa-search"></i></button>
+                    </div>
+                  </div>
+                </div>
+                {{ form_end(form) }}
         </div>
       </div>
     </div>

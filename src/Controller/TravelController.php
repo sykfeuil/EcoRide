@@ -6,9 +6,11 @@ namespace App\Controller;
 use App\Entity\Opinion;
 use App\Entity\Travel;
 use App\Entity\User;
+use App\Form\ReviewForm;
 use App\Form\TravelFilterForm;
 use App\Form\TravelForm;
 use App\Form\TravelJoinConfirmForm;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,10 +21,11 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class TravelController extends AbstractController
 {
-    #[Route('/travels', name : 'TravelList')]
+    #[Route('/travels/{wantedEndingPlace}', name : 'TravelList')]
     public function displayTravels(
         Request $request,
-        EntityManagerInterface $entityManager
+        EntityManagerInterface $entityManager,
+        string $wantedEndingPlace = ""
     ): Response
     {
 
@@ -108,6 +111,21 @@ class TravelController extends AbstractController
                 }
             }
         }
+        else {
+            // Accès par la barre de recherche de l'accueil
+            if ($wantedEndingPlace != "") {
+                $today = new DateTime();
+                $travelList = $entityManager->getRepository(Travel::class)->findBy(
+                    ['endingPlace' => $wantedEndingPlace, 'endingDate' => $today]
+                );
+
+                // Valeur par défaut des filtres
+                $form->setData([
+                    'endingPlace' => $wantedEndingPlace,
+                    'endingDate' => $today
+                ]);
+            }
+        }
 
         return $this->render('travelInterface/travelList.html.twig', [
             'filterForm' => $form,
@@ -182,7 +200,7 @@ class TravelController extends AbstractController
 
         $driver = $travel->getDriver();
 
-        $form = $this->createForm(TravelJoinConfirmForm::class);
+        $form = $this->createForm(ReviewForm::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -213,7 +231,9 @@ class TravelController extends AbstractController
             return $this->redirectToRoute('History');
         }
 
-        return $this->redirectToRoute('History');
+        return $this->render('travelInterface/reviewTravel.html.twig', [
+            'reviewForm' => $form
+        ]);
     }
 
     #[Route('/travels/join/{travelID}', name : 'JoinTravel')]
