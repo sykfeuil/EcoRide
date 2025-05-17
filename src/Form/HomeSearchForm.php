@@ -14,6 +14,7 @@ class HomeSearchForm extends AbstractType
         $builder
             ->add('wantedEndingPlace', TextType::class, [
                 'required' => true,
+                'sanitize_html' => true,
                 'attr' => [
                     'placeholder' => 'Rechercher un voyage aujourd\'hui...'
                 ]

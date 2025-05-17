@@ -6,6 +6,7 @@ use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Image;
@@ -29,7 +30,9 @@ class AccountDataForm extends AbstractType
             ->add('passenger')
             ->add('smoke')
             ->add('animal')
-            ->add('preferences')
+            ->add('preferences', TextType::class, [
+                'sanitize_html' => true,
+            ])
             ->add('credit', IntegerType::class, [
                 'required' => false,
                 'constraints' => [

@@ -19,12 +19,14 @@ class TravelFilterForm extends AbstractType
         $builder
             ->add('startingPlace', TextType::class, [
                 'required' => false,
+                'sanitize_html' => true,
             ])
             ->add('endingDate', DateType::class, [
                 'required' => true,
             ])
             ->add('endingPlace', TextType::class, [
                 'required' => true,
+                'sanitize_html' => true,
             ])
             ->add('ecoFilter', CheckboxType::class, [
                 'required' => false,

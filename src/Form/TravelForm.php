@@ -30,6 +30,7 @@ class TravelForm extends AbstractType
             ])
             ->add('startingPlace', TextType::class, [
                 'required' => true,
+                'sanitize_html' => true,
             ])
             ->add('endingDate', DateType::class, [
                 'required' => true,
@@ -39,6 +40,7 @@ class TravelForm extends AbstractType
             ])
             ->add('endingPlace', TextType::class, [
                 'required' => true,
+                'sanitize_html' => true,
             ])
             ->add('price', IntegerType::class, [
                 'required' => true,

@@ -23,6 +23,7 @@ class CarForm extends AbstractType
         $builder
             ->add('SerialNumber', TextType::class, [
                 'required' => true,
+                'sanitize_html' => true,
                 'constraints' => [
                     new Regex([
                         'pattern' => '/[A-HJ-NP-TV-Z]{2}[\s-]{0,1}[0-9]{3}[\s-]{0,1}[A-HJ-NP-TV-Z]{2}|[0-9]{2,4}[\s-]{0,1}[A-Z]{1,3}[\s-]{0,1}[0-9]{2}/',
@@ -36,6 +37,7 @@ class CarForm extends AbstractType
             ])
             ->add('Type', TextType::class, [
                 'required' => true,
+                'sanitize_html' => true,
             ])
             ->add('Color', ColorType::class, [
                 'required' => true,
@@ -48,6 +50,7 @@ class CarForm extends AbstractType
             ])
             ->add('Brand', TextType::class, [
                 'required' => true,
+                'sanitize_html' => true,
             ])
             ->add('Seats', IntegerType::class, [
                 'required' => true,
