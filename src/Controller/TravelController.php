@@ -196,6 +196,9 @@ class TravelController extends AbstractController
         // Uniquement pour les utilisateurs
         $this->denyAccessUnlessGranted('ROLE_USER');
 
+        $id = $this->getUser()->getUserIdentifier();
+        $user = $entityManager->getRepository(User::class)->find($id);
+
         $travel = $entityManager->getRepository(Travel::class)->find($travelID);
 
         $driver = $travel->getDriver();
@@ -214,6 +217,8 @@ class TravelController extends AbstractController
             $opinion->setReview($review);
             $opinion->setDriver($driver);
             $opinion->setValid(false);
+            $opinion->setPassenger($user);
+            $opinion->setTravel($travel);
 
             $entityManager->persist($opinion);
             $entityManager->flush();

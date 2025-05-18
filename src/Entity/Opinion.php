@@ -27,6 +27,14 @@ class Opinion
     #[ORM\Column]
     private ?bool $valid = null;
 
+    #[ORM\ManyToOne(inversedBy: 'opinionsISubmitted')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?user $passenger = null;
+
+    #[ORM\ManyToOne(inversedBy: 'opinions')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Travel $travel = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -76,6 +84,30 @@ class Opinion
     public function setValid(bool $valid): static
     {
         $this->valid = $valid;
+
+        return $this;
+    }
+
+    public function getPassenger(): ?user
+    {
+        return $this->passenger;
+    }
+
+    public function setPassenger(?user $passenger): static
+    {
+        $this->passenger = $passenger;
+
+        return $this;
+    }
+
+    public function getTravel(): ?Travel
+    {
+        return $this->travel;
+    }
+
+    public function setTravel(?Travel $travel): static
+    {
+        $this->travel = $travel;
 
         return $this;
     }

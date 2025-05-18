@@ -63,6 +63,50 @@ class RegistrationController extends AbstractController
         ]);
     }
 
+    #[Route('/createEmployee', name: 'app_register_employee')]
+    public function registerEmployee(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
+    {
+        // Uniquement pour l'administrateur
+        $this->denyAccessUnlessGranted("ROLE_ADMIN");
+
+        $user = new User();
+        $form = $this->createForm(RegistrationForm::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            /** @var string $plainPassword */
+            $plainPassword = $form->get('plainPassword')->getData();
+            $username = $form->get('username')->getData();
+            $email = $form->get('email')->getData();
+
+            // encode the plain password
+            $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
+            $user->setUsername($username);
+            $user->setEmail($email);
+            $user->setRoles(['ROLE_EMPLOYEE']);
+
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            // generate a signed url and email it to the user
+            $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
+                (new TemplatedEmail())
+                    ->from(new Address('syk.devmail@gmail.com', 'EcoRide'))
+                    ->to((string) $user->getEmail())
+                    ->subject('Merci de confirmer votre email')
+                    ->htmlTemplate('registration/confirmation_email.html.twig')
+            );
+
+            // do anything else you need here, like send an email
+
+            return $this->redirectToRoute('AdminInterface');
+        }
+
+        return $this->render('registration/register.html.twig', [
+            'registrationForm' => $form,
+        ]);
+    }
+
     #[Route('/verify/email', name: 'app_verify_email')]
     public function verifyUserEmail(Request $request, TranslatorInterface $translator, UserRepository $userRepository): Response
     {

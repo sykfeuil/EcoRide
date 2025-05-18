@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Espace employé - EcoRide{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row mt-5">
+
+            <div class="col-12">
+                <h2 class="text-primary fw-bold">Espace employé</h2>
+                <hr class="text-primary">
+            </div>
+
+            <div class="col-12 col-lg-12">
+                <h2 class="text-primary fw-bold">Les nouveaux avis</h2>
+                <hr class="text-primary">
+            </div>
+
+            <div class="col-12 table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr class="text-center align-middle">
+                            <td>Voyage</td>
+                            <td>Chauffeur</td>
+                            <td>Passager</td>
+                            <td>Avis</td>
+                            <td></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for oneReview in allOpinions %}
+                            {% if oneReview.valid == false %}
+                                <tr class="text-center align-middle">
+                                    <td>
+                                    Numéro {{ oneReview.travel.id }}<br>
+                                    Départ de {{ oneReview.travel.startingPlace }}<br>
+                                    Le {{ oneReview.travel.startingDate|date("d/m/Y", "Europe/Paris") }}<br>
+                                    Arrivée à {{ oneReview.travel.endingPlace }}<br>
+                                    Le {{ oneReview.travel.endingDate|date("d/m/Y", "Europe/Paris") }}
+                                    </td>
+                                    <td>
+                                        {{ oneReview.driver.username }}<br>
+                                        {{ oneReview.driver.email }}
+                                    </td>
+                                    <td>
+                                        {{ oneReview.passenger.username }}<br>
+                                        {{ oneReview.passenger.email }}
+                                    </td>
+                                    <td>
+                                        {% if oneReview.mark == 1 %}
+                                            <i class="bi bi-hand-thumbs-up-fill text-success"></i>
+                                        {% else %}
+                                            <i class="bi bi-hand-thumbs-down-fill text-danger"></i>
+                                        {% endif %}
+                                        <br><br>
+                                        {{ oneReview.review|raw }}
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-success text-light" href="{{ path('ValidateReview', {'reviewID':oneReview.id}  )  }}">Valider</a><br><br>
+                                        <a class="btn btn-danger text-light" href="{{ path('DeleteReview', {'reviewID':oneReview.id}  )  }}">Refuser</a>
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

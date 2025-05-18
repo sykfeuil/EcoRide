@@ -90,12 +90,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Opinion::class, mappedBy: 'driver', orphanRemoval: true)]
     private Collection $opinions;
 
+    /**
+     * @var Collection<int, Opinion>
+     */
+    #[ORM\OneToMany(targetEntity: Opinion::class, mappedBy: 'passenger', orphanRemoval: true)]
+    private Collection $opinionsISubmitted;
+
     public function __construct()
     {
         $this->cars = new ArrayCollection();
         $this->travelAsDriver = new ArrayCollection();
         $this->travelAsPassenger = new ArrayCollection();
         $this->opinions = new ArrayCollection();
+        $this->opinionsISubmitted = new ArrayCollection();
     }
 
     
@@ -403,6 +410,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($opinion->getDriver() === $this) {
                 $opinion->setDriver(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Opinion>
+     */
+    public function getOpinionsISubmitted(): Collection
+    {
+        return $this->opinionsISubmitted;
+    }
+
+    public function addOpinionsISubmitted(Opinion $opinionsISubmitted): static
+    {
+        if (!$this->opinionsISubmitted->contains($opinionsISubmitted)) {
+            $this->opinionsISubmitted->add($opinionsISubmitted);
+            $opinionsISubmitted->setPassenger($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOpinionsISubmitted(Opinion $opinionsISubmitted): static
+    {
+        if ($this->opinionsISubmitted->removeElement($opinionsISubmitted)) {
+            // set the owning side to null (unless already changed)
+            if ($opinionsISubmitted->getPassenger() === $this) {
+                $opinionsISubmitted->setPassenger(null);
             }
         }
 

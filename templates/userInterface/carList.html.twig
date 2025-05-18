@@ -8,24 +8,27 @@
             <h2 class="mx-5 my-auto text-primary fw-bold">Liste de mes voitures</h2>
             <a href="/cars/create" class="btn btn-success text-light mx-5">Nouvelle voiture</a>
         </div>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">Marque</th>
-                    <th scope="col">Modèle</th>
-                    <th scope="col">Numéro d'immatriculation</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for car in carList %}
+
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
                     <tr>
-                        <td>{{ car.brand }}</td>
-                        <td>{{ car.type }}</td>
-                        <td>{{ car.serialNumber }}</td>
-                        <td><a href="{{ path('DeleteCar', {'carID':car.id}  )  }}" class="text-danger">Supprimer</a></td>
+                        <th scope="col">Marque</th>
+                        <th scope="col">Modèle</th>
+                        <th scope="col">Numéro d'immatriculation</th>
                     </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    {% for car in carList %}
+                        <tr>
+                            <td>{{ car.brand }}</td>
+                            <td>{{ car.type }}</td>
+                            <td>{{ car.serialNumber }}</td>
+                            <td><a href="{{ path('DeleteCar', {'carID':car.id}  )  }}" class="text-danger">Supprimer</a></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
 {% endblock %}

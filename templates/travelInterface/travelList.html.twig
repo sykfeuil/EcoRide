@@ -54,6 +54,7 @@
             </div>
         {{ form_end(filterForm) }}
 
+        <div class="table-responsive">
         <table class="table">
             <tbody>
                 {% for travel in travelList %}
@@ -78,5 +79,6 @@
                 {% endfor %}
             </tbody>
         </table>
+        </div>
     </div>
 {% endblock %}

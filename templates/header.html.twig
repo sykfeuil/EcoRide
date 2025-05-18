@@ -34,6 +34,13 @@
                                         {% if app.user.driver == true %}
                                             <li><a class="dropdown-item active text-white link-opacity-50-hover" href="/cars">Voitures</a></li>
                                         {% endif %}
+                                        {% if is_granted('ROLE_EMPLOYEE') %}
+                                            <li><a class="dropdown-item active text-white link-opacity-50-hover" href="/account/employee">Espace employé</a></li>
+                                        {% endif %}
+                                        {% if is_granted('ROLE_ADMIN') %}
+                                            <li><a class="dropdown-item active text-white link-opacity-50-hover" href="/account/employee">Espace employé</a></li>
+                                            <li><a class="dropdown-item active text-white link-opacity-50-hover" href="/account/admin">Espace administrateur</a></li>
+                                        {% endif %}
                                     </ul>
                                 </li>
                                 <li class="nav-item">

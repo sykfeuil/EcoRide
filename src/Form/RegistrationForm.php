@@ -44,7 +44,6 @@ class RegistrationForm extends AbstractType
             ])
             ->add('email', EmailType::class, [
                 'mapped' => false,
-                'sanitize_html' => true,
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Adresse mail obligatoire',

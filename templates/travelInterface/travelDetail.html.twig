@@ -84,18 +84,20 @@
 
             <div class="col-12 mx-5">
                 {% for oneReview in travel.driver.opinions %}
-                    <div class="row m-4">
-                        <div class="col-1">
-                            {% if oneReview.mark == 1 %}
-                                <i class="bi bi-hand-thumbs-up-fill text-success"></i>
-                            {% else %}
-                                <i class="bi bi-hand-thumbs-down-fill text-danger"></i>
-                            {% endif %}
+                    {% if oneReview.valid == true %}
+                        <div class="row m-4">
+                            <div class="col-1">
+                                {% if oneReview.mark == 1 %}
+                                    <i class="bi bi-hand-thumbs-up-fill text-success"></i>
+                                {% else %}
+                                    <i class="bi bi-hand-thumbs-down-fill text-danger"></i>
+                                {% endif %}
+                            </div>
+                            <div class="col">
+                                <p>{{ oneReview.review|raw }}</p>
+                            </div>
                         </div>
-                        <div class="col">
-                            <p>{{ oneReview.review|raw }}</p>
-                        </div>
-                    </div>
+                    {% endif %}
                 {% endfor %}
             </div>
         </div>

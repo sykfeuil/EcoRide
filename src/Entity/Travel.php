@@ -57,9 +57,16 @@ class Travel
     #[ORM\Column]
     private ?int $currentState = null;
 
+    /**
+     * @var Collection<int, Opinion>
+     */
+    #[ORM\OneToMany(targetEntity: Opinion::class, mappedBy: 'travel', orphanRemoval: true)]
+    private Collection $opinions;
+
     public function __construct()
     {
         $this->passengers = new ArrayCollection();
+        $this->opinions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -219,6 +226,36 @@ class Travel
     public function setCurrentState(int $currentState): static
     {
         $this->currentState = $currentState;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Opinion>
+     */
+    public function getOpinions(): Collection
+    {
+        return $this->opinions;
+    }
+
+    public function addOpinion(Opinion $opinion): static
+    {
+        if (!$this->opinions->contains($opinion)) {
+            $this->opinions->add($opinion);
+            $opinion->setTravel($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOpinion(Opinion $opinion): static
+    {
+        if ($this->opinions->removeElement($opinion)) {
+            // set the owning side to null (unless already changed)
+            if ($opinion->getTravel() === $this) {
+                $opinion->setTravel(null);
+            }
+        }
 
         return $this;
     }
