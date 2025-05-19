@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Noter le trajet - EcoRide{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="d-inline-flex m-0 p-3 justify-content-center text-align-center">
+            <h2 class="mx-5 my-auto text-primary fw-bold">Noter le voyage</h2>
+            <hr class="text-primary">
+        </div>
+
+        
+            {{ form_errors(reviewForm) }}
+
+            {{ form_start(reviewForm) }}
+                <div class="row">
+                    <div class="col-2">
+                        {{ form_row(reviewForm.goodTravel, {
+                            label: 'Ce voyage s\'est bien passé'
+                        }) }}
+                    </div>
+                    <div class="col col-12">
+                        {{ form_row(reviewForm.review, {
+                            label: 'Déposer un commentaire'
+                        }) }}
+                    </div>
+                </div>
+                
+                <div class="text-center">
+                    <button type="submit" class="btn btn-success text-light my-5">Valider</button>
+                </div>
+            {{ form_end(reviewForm) }}
+    </div>
+{% endblock %}

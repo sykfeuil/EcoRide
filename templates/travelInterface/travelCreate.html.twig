@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouveau trajet - EcoRide{% endblock %}
+
+{% block body %}
+    <div class="container p-3">
+        <div class="row">
+
+            <div class="col-12">
+                <h2 class="mx-3 my-auto text-primary fw-bold">Nouveau trajet</h2>
+            </div>
+
+            <div class="col-12 py-3">
+                {{ form_errors(travelForm) }}
+
+                {{ form_start(travelForm) }}
+                    <div class="row">
+                        <div class="col">
+                            {{ form_row(travelForm.startingPlace, {
+                                label: 'Lieu de départ',
+                            }) }}
+                        </div>
+                        <div class="col">
+                            {{ form_row(travelForm.startingDate, {
+                                label: 'Jour du départ',
+                            }) }}
+                        </div>
+                        <div class="col">
+                            {{ form_row(travelForm.startingHour, {
+                                label: 'Heure du départ',
+                            }) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            {{ form_row(travelForm.endingPlace, {
+                                label: 'Lieu d\'arrivée',
+                            }) }}
+                        </div>
+                        <div class="col">
+                             {{ form_row(travelForm.endingDate, {
+                                label: 'Jour d\'arrivée',
+                            }) }}
+                        </div>
+                        <div class="col">
+                            {{ form_row(travelForm.endingHour, {
+                                label: 'Heure d\'arrivée',
+                            }) }}
+                        </div>
+                    </div>
+                    {{ form_row(travelForm.price, {
+                        label: 'Prix par personne (un minimum de 2 crédits est requis pour assurer le bon fonctionnement de la plateforme)',
+                    }) }}
+                    {{ form_row(travelForm.car, {
+                        label: 'Quelle voiture choisir pour le trajet ?',
+                    }) }}
+
+                    <button type="submit" class="btn btn-success text-light my-5">Créer un nouveau trajet</button>
+                {{ form_end(travelForm) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

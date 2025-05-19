@@ -1,0 +1,106 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détail du trajet - EcoRide{% endblock %}
+
+{% block body %}
+    <div class="container p-3">
+        
+        <a class="m-4 btn btn-success text-light" href="{{ path('JoinTravel', {'travelID':travel.id}  )  }}">Je participe</a>
+
+        <div class="row mt-5">
+            <div class="col-12 col-lg-12">
+                <h2 class="text-primary fw-bold">Détails du trajet</h2>
+                <hr class="text-primary">
+            </div>
+
+            <div class="col-12 mx-5">
+                <p>Places restantes : {{ travel.availableSeats }}</p>
+            </div>
+
+            <div class="col-12 mx-5">
+                <p>Coût du voyage : {{ travel.price }} crédits</p>
+            </div>
+
+            <div class="col-12 mx-5">
+                <p>Départ de {{ travel.startingPlace }} le {{ travel.startingDate|date("d/m/Y", "Europe/Paris") }} à {{ travel.startingHour|date("H:i", "Europe/Paris") }}</p>
+            </div>
+
+            <div class="col-12 mx-5">
+                <p>Arrivée à {{ travel.endingPlace }} le {{ travel.endingDate|date("d/m/Y", "Europe/Paris") }} à {{ travel.endingHour|date("H:i", "Europe/Paris") }}</p>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-12 col-lg-12">
+                <h2 class="text-primary fw-bold">Le véhicule</h2>
+                <hr class="text-primary">
+            </div>
+
+            <div class="col-12 mx-5">
+                <p>Modèle : {{ travel.car.brand }} {{ travel.car.type }}</p>
+            </div>
+
+            <div class="col-12 mx-5">
+                <p>Immatriculé : {{ travel.car.serialNumber }}</p>
+            </div>
+
+            <div class="col-12 mx-5">
+                <p>Energie : {% if travel.car.electrical == 0 %}Essence{% else %}Electrique{% endif %}</p>
+            </div>
+
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-12 col-lg-12">
+                <h2 class="text-primary fw-bold">Le conducteur</h2>
+                <hr class="text-primary">
+            </div>
+
+            <div class="col-12 d-inline-flex m-0 p-3">
+                <img class="rounded end-0 mx-5" {% if travel.driver.picture is empty %}src="{{ asset('images/USER_PIC.jpg') }}"{% else %}src="{{ asset('images/uploads/' ~ travel.driver.picture) }}"{% endif %} alt="Profil" height="100" width="100">
+                <h5 class="mx-3 my-auto fw-bold">{{ travel.driver.username }}</h2>
+                <img class="starIco my-auto ms-5" src="{{ asset('images/Star_TR.png') }}" alt="Etoile jaune">
+                <h5 class="ms-1 my-auto text-warning fw-bold">{{ travel.driver.mark }}</h5>
+            </div>
+
+            <div class="col-12 mx-5">
+                <p>Fumeurs acceptés : {% if travel.driver.smoke == 0 %}Non{% else %}Oui{% endif %}</p>
+            </div>
+
+            <div class="col-12 mx-5">
+                <p>Animaux acceptés : {% if travel.driver.animal == 0 %}Non{% else %}Oui{% endif %}</p>
+            </div>
+
+            <div class="col-12 mx-5">
+                <p>Autres préférences : {{ travel.driver.preferences }}</p>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-12 col-lg-12">
+                <h2 class="text-primary fw-bold">Avis</h2>
+                <hr class="text-primary">
+            </div>
+
+            <div class="col-12 mx-5">
+                {% for oneReview in travel.driver.opinions %}
+                    {% if oneReview.valid == true %}
+                        <div class="row m-4">
+                            <div class="col-1">
+                                {% if oneReview.mark == 1 %}
+                                    <i class="bi bi-hand-thumbs-up-fill text-success"></i>
+                                {% else %}
+                                    <i class="bi bi-hand-thumbs-down-fill text-danger"></i>
+                                {% endif %}
+                            </div>
+                            <div class="col">
+                                <p>{{ oneReview.review|raw }}</p>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

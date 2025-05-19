@@ -1,0 +1,68 @@
+/* assets/styles/app.scss */
+
+$primary : #828b6a;
+$secondary : #a6b19d;
+$success : #2F9B61;
+$danger : #DB232C;
+$warning : #FFC600;
+$light : #e4eacf;
+$dark : #444837;
+$white : #f5f7f4;
+
+$text-primary : 'Playfair Display';
+
+.baseHeader, .baseFooter {
+  height: max-content;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background: $primary;
+  font-family: $text-primary;
+  color: $light;
+  text-align: center;
+}
+
+.baseFooter {
+  bottom: 0;
+  left: 0;
+}
+
+#carouselHomeDesign {
+  height: 500px;
+  background: black;
+}
+
+.search-container {
+  position: relative;
+}
+
+.search-icon {
+  position: absolute;
+  top: 50%;
+  left: 15px;
+  transform: translateY(-50%);
+  color: $primary;
+}
+
+.icon {
+  font-size: xx-large;
+  color: $primary;
+}
+
+h1, h2, h3, h4, h5, h6, p, div, input, label {
+  font-family: $text-primary;
+}
+
+.frenchFlag {
+  height: 25px;
+  margin-bottom: 5px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.starIco {
+  height: 25px;
+  margin-top: 7px;
+}
+
+@import '../../vendor/twbs/bootstrap/scss/bootstrap';

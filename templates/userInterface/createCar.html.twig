@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvelle voiture - EcoRide{% endblock %}
+
+{% block body %}
+    <div class="container p-3">
+        <div class="row">
+
+            <div class="col-12">
+                <h2 class="mx-3 my-auto text-primary fw-bold">Nouvelle voiture</h2>
+            </div>
+
+            <div class="col-12 py-3">
+                {{ form_errors(carForm) }}
+
+                {{ form_start(carForm) }}
+                    {{ form_row(carForm.SerialNumber, {
+                        label: 'Plaque d\'immatriculation',
+                    }) }}
+                    {{ form_row(carForm.SerialDate, {
+                        label: 'Date d\'immatriculation',
+                    }) }}
+                    {{ form_row(carForm.Brand, {
+                        label: 'Marque',
+                    }) }}
+                    {{ form_row(carForm.Type, {
+                        label: 'Modèle',
+                    }) }}
+                    {{ form_row(carForm.Color, {
+                        label: 'Couleur',
+                    }) }}
+                    {{ form_row(carForm.Seats, {
+                        label: 'Nombre de sièges passagers',
+                    }) }}
+                    {{ form_row(carForm.Electrical, {
+                        label: 'Voiture électrique ?',
+                    }) }}
+
+                    <button type="submit" class="btn btn-success text-light my-5">Créer une nouvelle voiture</button>
+                {{ form_end(carForm) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

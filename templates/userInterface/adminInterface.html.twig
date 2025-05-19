@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Espace administrateur - EcoRide{% endblock %}
+
+{% block body %}
+    <div class="container">
+
+        <div class="row mt-5">
+
+            <div class="col-12">
+                <h2 class="text-primary fw-bold">Espace administrateur</h2>
+                <hr class="text-primary">
+            </div>
+
+            <div class="col-12">
+                <h2 class="text-primary fw-bold">Tableau de bord</h2>
+                <hr class="text-primary">
+            </div>
+
+            <div class="col-12 h-25 m-4 text-center justify-center align-middle">
+                <div class="rounded border border-2 border-success w-25 mx-auto">
+                    <h2 class="fw-bold text-success">Total recettes</h2>
+                    <h2 class="fw-bold text-success">{{ nbrCreditEarned }}</h2>
+                </div>
+            </div>
+
+            <div class="col-12">
+                {{ render_chart(chart) }}
+            </div>
+
+        </div>
+
+        <div class="row mt-5">
+
+            <div class="col-12">
+                <h2 class="text-primary fw-bold">Liste des utilisateurs</h2>
+                <hr class="text-primary">
+            </div>
+
+            <div class="col-12">
+                <a class="btn btn-success text-light" href="{{ path('app_register_employee') }}">Ajouter un employé</a>
+                <hr class="text-primary">
+            </div>
+
+            <div class="col-12 table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr class="fw-bold text-center align-middle">
+                            <td>Nom</td>
+                            <td>Email</td>
+                            <td>Rôles</td>
+                            <td></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for oneUser in allUsers %}
+                            {% if oneUser.id != currentUser.id %}
+                                <tr class="text-center align-middle">
+                                    <td>
+                                        {{ oneUser.username }}
+                                    </td>
+                                    <td>
+                                        {{ oneUser.email }}
+                                    </td>
+                                    <td>
+                                        {{ oneUser.roles|join(', ') }}
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-danger text-light" href="{{ path('DeleteUser', {'userID':oneUser.id}  )  }}">Supprimer</a>
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
