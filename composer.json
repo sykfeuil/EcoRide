@@ -37,7 +37,7 @@
         "symfony/process": "7.2.*",
         "symfony/property-access": "7.2.*",
         "symfony/property-info": "7.2.*",
-        "symfony/requirements-checker": "^2.0",
+        "symfony/requirements-checker": "*",
         "symfony/resend-mailer": "7.2.*",
         "symfony/runtime": "7.2.*",
         "symfony/security-bundle": "7.2.*",
@@ -92,7 +92,7 @@
             "cache:clear": "symfony-cmd",
             "assets:install %PUBLIC_DIR%": "symfony-cmd",
             "importmap:install": "symfony-cmd",
-            "requirements-checker": "script"
+            "requirements-checker": "php-script"
         },
         "post-install-cmd": [
             "@auto-scripts"
