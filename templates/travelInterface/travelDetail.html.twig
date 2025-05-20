@@ -57,7 +57,7 @@
             </div>
 
             <div class="col-12 d-inline-flex m-0 p-3">
-                <img class="rounded end-0 mx-5" {% if travel.driver.picture is empty %}src="{{ asset('images/USER_PIC.jpg') }}"{% else %}src="{{ asset('images/uploads/' ~ travel.driver.picture) }}"{% endif %} alt="Profil" height="100" width="100">
+                <img class="rounded end-0 mx-5" {% if travel.driver.picture is empty %}src="{{ asset('images/USER_PIC.jpg') }}"{% else %}src="uploads/{{ travel.driver.picture }}"{% endif %} alt="Profil" height="100" width="100">
                 <h5 class="mx-3 my-auto fw-bold">{{ travel.driver.username }}</h2>
                 <img class="starIco my-auto ms-5" src="{{ asset('images/Star_TR.png') }}" alt="Etoile jaune">
                 <h5 class="ms-1 my-auto text-warning fw-bold">{{ travel.driver.mark }}</h5>
