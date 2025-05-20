@@ -100,8 +100,7 @@
             "cache:clear": "symfony-cmd",
             "assets:install %PUBLIC_DIR%": "symfony-cmd",
             "importmap:install": "symfony-cmd",
-            "requirements-checker": "script",
-            "vendor/bin/requirements-checker": "php-script"
+            "requirements-checker": "script"
         },
         "post-install-cmd": [
             "@auto-scripts"
