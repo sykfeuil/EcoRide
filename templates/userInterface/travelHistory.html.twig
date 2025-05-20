@@ -7,7 +7,7 @@
         <div class="d-inline-flex m-0 p-3 justify-content-center text-align-center">
             <h2 class="mx-5 my-auto text-primary fw-bold">Historique</h2>
             {% if app.user.driver == true %}
-            <a href="/travels/create" class="btn btn-success text-light mx-5">Créer un voyage</a>
+            <a href="{{ path('CreateTravel') }}" class="btn btn-success text-light mx-5">Créer un voyage</a>
             {% endif %}
         </div>
 
