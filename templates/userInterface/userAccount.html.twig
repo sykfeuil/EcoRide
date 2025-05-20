@@ -13,7 +13,7 @@
             </div>
 
             <div class="col-12 col-lg-4 text-center">
-                <img class="rounded end-0 mx-5" {% if currentUser.picture is empty %}src="{{ asset('images/USER_PIC.jpg') }}"{% else %}src="{{ asset('images/uploads/' ~ travel.driver.picture) }}"{% endif %} alt="Profil" height="250" width="250">
+                <img class="rounded end-0 mx-5" {% if currentUser.picture is empty %}src="{{ asset('images/USER_PIC.jpg') }}"{% else %}src="{{ asset('images/uploads/' ~ currentUser.picture) }}"{% endif %} alt="Profil" height="250" width="250">
                 <a href="/account/del" class="btn btn-danger text-light mt-3">Supprimer l'image</a>
             </div>
             
