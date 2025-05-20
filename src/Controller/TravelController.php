@@ -379,7 +379,7 @@ class TravelController extends AbstractController
         return $this->redirectToRoute('History');
     }
 
-    #[Route('/travels/create', name : 'CreateTravel')]
+    #[Route('/travels/create/new', name : 'CreateTravel')]
     public function createTravel(
         Request $request,
         EntityManagerInterface $entityManager
