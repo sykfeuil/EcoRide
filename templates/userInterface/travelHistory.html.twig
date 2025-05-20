@@ -31,7 +31,7 @@
 
                                 <td>
                                 {{ travel.driver.username }}
-                                <br><img class="rounded end-0 mx-5" {% if travel.driver.picture is empty %}src="{{ asset('images/USER_PIC.jpg') }}"{% else %}src="uploads/"{{ travel.driver.picture }}{% endif %} alt="Profil" height="50" width="50">
+                                <br><img class="rounded end-0 mx-5" {% if travel.driver.picture is empty %}src="{{ asset('images/USER_PIC.jpg') }}"{% else %}src="{{ asset('images/uploads/' ~ travel.driver.picture) }}"{% endif %} alt="Profil" height="50" width="50">
                                 <br><div class="d-inline-flex">
                                         <img src="{{ asset('images/Star_TR.png') }}" alt="Etoile jaune" height="20" width="20">
                                         <h5 class="text-warning fw-bold">{{ travel.driver.mark }}</h5>
